@@ -14,8 +14,6 @@ echo "enumeration subdomain  successfully  "
 #install httpx
 docker pull projectdiscovery/httpx
 
-sleep(1)
-
 #install nuclei
 
 docker pull projectdiscovery/nuclei
@@ -32,8 +30,6 @@ echo "subfinder & httpx & nuclei  successfully installs "
 
 #enumeration subdomain
 
-sleep(2)
-
 httpx -l $1subdomain.txt  -o  $1live.txt
 
 echo "enumeration httpx  successfully  " 
@@ -45,7 +41,5 @@ echo "hatxss.yaml download successfully  "
 wc -l <  $1live.txt
 
 #DOM-XSS-CVE-2021-24891
-
-sleep(1)
 
 nuclei -list $1live.txt -t hatxss.yaml -rl 10
