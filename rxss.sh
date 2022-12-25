@@ -7,8 +7,14 @@ docker pull projectdiscovery/subfinder
 
 alias subfinder='docker run -it --rm -w /data -v $(pwd):/data projectdiscovery/subfinder'
 
+subfinder -d $1 -silent >> $1subdomain.txt
+
+echo "enumeration subdomain  successfully  " 
+
 #install httpx
 docker pull projectdiscovery/httpx
+
+sleep(1)
 
 #install nuclei
 
@@ -26,11 +32,7 @@ echo "subfinder & httpx & nuclei  successfully installs "
 
 #enumeration subdomain
 
-subfinder -d $1 -silent >> $1subdomain.txt
-
-wc -l <  $1subdomain.txt 
-
-echo "enumeration subdomain  successfully  " 
+sleep(2)
 
 httpx -l $1subdomain.txt  -o  $1live.txt
 
@@ -43,5 +45,7 @@ echo "hatxss.yaml download successfully  "
 wc -l <  $1live.txt
 
 #DOM-XSS-CVE-2021-24891
+
+sleep(1)
 
 nuclei -list $1live.txt -t hatxss.yaml -rl 10
